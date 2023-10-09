@@ -175,51 +175,61 @@ class CLI extends \WP_CLI_Command
             unset($convertOptions['converters']);
         }
 
-        foreach($groups as $group){
+        foreach ($groups as $group) {
             if (count($group['files']) == 0) continue;
-
+        
             \WP_CLI::log('Converting ' . count($group['files']) . ' files in ' . $group['groupName']);
             \WP_CLI::log('------------------------------');
             $root = $group['root'];
-
+        
+            // Initialize variables for tracking remaining files.
+            $totalFiles = count($group['files']);
+            $convertedFiles = 0;
+        
             $files = array_reverse($group['files']);
-            //echo count($group["files"]);
-            foreach($files as $key => $file)
-            {
+            foreach ($files as $key => $file) {
                 $path = trailingslashit($group['root']) . $file;
                 \WP_CLI::log('Converting: ' . $file);
-
+        
                 $result = Convert::convertFile($path, $config, $convertOptions, $converter);
-
+        
+                // Update the counter for converted files.
                 if ($result['success']) {
+                    $convertedFiles++;
+        
                     $orgSize = $result['filesize-original'];
                     $webpSize = $result['filesize-webp'];
-
                     $orgTotalFilesize += $orgSize;
                     $webpTotalFilesize += $webpSize;
-
-                    //$percentage = round(($orgSize - $webpSize)/$orgSize * 100);
-                    $percentage = ($orgSize == 0 ? 100 : round(($webpSize/$orgSize) * 100));
-
+        
+                    $percentage = ($orgSize == 0 ? 100 : round(($webpSize / $orgSize) * 100));
+        
                     \WP_CLI::log(
                         \WP_CLI::colorize(
                             "%GOK%n. " .
                             "Size: " .
-                            ($percentage<90 ? "%G" : ($percentage<100 ? "%Y" : "%R")) .
+                            ($percentage < 90 ? "%G" : ($percentage < 100 ? "%Y" : "%R")) .
                             $percentage .
                             "% %nof original" .
                             " (" . self::printableSize($orgSize) . ' => ' . self::printableSize($webpSize) .
                             ") "
                         )
                     );
-                    //print_r($result);
                 } else {
                     \WP_CLI::log(
                         \WP_CLI::colorize("%RConversion failed. " . $result['msg'] . "%n")
                     );
                 }
+        
+                // Show the number of remaining files to be converted in the CLI
+                $remainingFiles = $totalFiles - $convertedFiles;
+                \WP_CLI::log(
+                    \WP_CLI::colorize('Files remaining to be converted: %G' . $remainingFiles . '%n')
+                );
             }
         }
+        
+        
 
         if ($orgTotalFilesize > 0) {
           $percentage = ($orgTotalFilesize == 0 ? 100 : round(($webpTotalFilesize/$orgTotalFilesize) * 100));
