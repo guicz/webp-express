@@ -3,8 +3,8 @@ Contributors: rosell.dk
 Donate link: https://ko-fi.com/rosell
 Tags: webp, images, performance
 Requires at least: 4.0
-Tested up to: 5.8
-Stable tag: 0.25.5
+Tested up to: 6.5
+Stable tag: 0.25.9
 Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -42,7 +42,7 @@ The plugin implements the "WebP On Demand" solution described [here](https://git
 - Better user experience (whether performance goes from terrible to bad, or from good to impressive, it is a benefit).
 - Better ranking in Google searches (performance is taken into account by Google).
 - Less bandwidth consumption - makes a huge difference in the parts of the world where the internet is slow and costly (you know, ~80% of the world population lives under these circumstances).
-- Currently ~95% of all traffic, and ~96% of mobile browsing traffic are done with browsers supporting webp. Check current numbers on [caniuse.com](https://caniuse.com/webp).
+- Currently ~97% of all traffic are done with browsers supporting webp.
 - It's great for the environment too! Reducing network traffic reduces electricity consumption which reduces CO2 emissions.
 
 == Installation ==
@@ -172,24 +172,29 @@ Bread on the table don't come for free, even though this plugin does, and always
 == Supporters of WebP Express ==
 
 **Persons who recently contributed with [ko-fi](https://ko-fi.com/rosell) - Thanks!**
-* 3 May: Jonas
-* 27 Apr: Jonas
-* 7 Apr: Anuar
-* 30 Mar: Michael Schober
-* 17 Mar: bluesix
-* 13 Mar: Troglos
+
+* 3 Nov: Tobi
+* 5 Nov: Anon
+* 18 Nov: Oleksii
+* 20 Feb: Assen Kovatchev
+* 22 Feb: Peter
+* 29 Feb: Luis Méndez Alejo
+* 5 Mar: tomottoe
+* 9 Mar: La Braud
 
 **Persons who contributed with extra generously amounts of coffee / lifetime backing (>30$) - thanks!:**
 
 * Max Kreminsky ($115)
 * Justin - BigScoots ($105)
 * Bill Vallance ($102)
+* Label Vier ($100)
 * Sebastian ($99)
 * Tammy Lee ($90)
 * Steven Sullivan ($51)
 * Mathieu Gollain-Dupont ($50)
 * Erica Dreisbach ($50)
 * Brian Laursen ($50)
+* Dimitris Vayenas ($50)
 
 **Persons currently backing the project via GitHub Sponsors or patreon - Thanks!**
 
@@ -813,6 +818,25 @@ If you want to make sure that my coffee supplies don't run dry, you can even buy
 
 == Changelog ==
 
+= 0.25.9 =
+(released 7 April 2024)
+* Bugfix: Fixed ewww conversion method after ewww API change
+
+= 0.25.8 =
+(released 20 October 2023)
+* Bugfix: Depreciation warning on PHP 8.2 with Alter HTML. Thanks to @igamingsolustions for reporting the bug
+
+= 0.25.7 =
+(released 19 October 2023)
+* Bugfix: Removed depreciation warning on settings screen, which was showing in PHP 8.2. Thanks to Rob Meijerink from the Netherlands for providing the fix in a pull request
+* Bugfix: Removed depreciation warning when converting, happening in PHP 8.2. Thanks to Sophie B for reporting and Rob Meijerink from the Netherlands for providing the fix in a pull request
+* Bugfix: One of the Mime fallback methods did not work. Thanks to gerasart from Ukraine for providing the fix in a pull request
+
+= 0.25.6 =
+(released 15 April 2023)
+* Bugfix: A bug in another plugin can cause delete file hook to be called with an empty string, which WebP Express was not prepared for (fatal exception). Thanks to Colin Frick from Liechtenstein for providing the fix in a pull request on [github](https://github.com/rosell-dk/webp-express/)
+* Bugfix: Bug when testing imagick converter from settings page (only PHP 8). Thanks to Sisir from Bangladesh for reporting and providing the fix in a pull request
+
 = 0.25.5 =
 (released 23 May 2022)
 * When using the "Prevent using webps larger than original" with Alter HTML (picture tags) on images with srcset, those webps that where larger than the originals was picked out from the srcset for the webp. This could lead to bad quality images. In the fix, the image will only have a webp source alternative when ALL the webps are smaller than their originals (when the "prevent..." option is set).
@@ -842,6 +866,18 @@ If you want to make sure that my coffee supplies don't run dry, you can even buy
 For older releases, check out changelog.txt
 
 == Upgrade Notice ==
+
+= 0.25.9 =
+* Fixed ewww conversion method after ewww API change
+
+= 0.25.8 =
+* PHP 8.2 bugfix
+
+= 0.25.7 =
+* PHP 8.2 bugfixes
+
+= 0.25.6 =
+* Two bugfixes - thanks for the pull requests on github :)
 
 = 0.25.5 =
 * Two bugfixes, one of them in Alter HTML. If you are using Alter HTML with picture tags and have enabled "Prevent using webps larger than original" and are using page caching, you should flush your page cache.

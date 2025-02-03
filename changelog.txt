@@ -1,3 +1,22 @@
+= 0.25.9 =
+(released 7 April 2024)
+* Bugfix: Fixed ewww conversion method after ewww API change
+
+= 0.25.8 =
+(released 20 October 2023)
+* Bugfix: Depreciation warning on PHP 8.2 with Alter HTML. Thanks to @igamingsolustions for reporting the bug
+
+= 0.25.7 =
+(released 19 October 2023)
+* Bugfix: Removed depreciation warning on settings screen, which was showing in PHP 8.2. Thanks to Rob Meijerink from the Netherlands for providing the fix in a pull request
+* Bugfix: Removed depreciation warning when converting, happening in PHP 8.2. Thanks to Sophie B for reporting and Rob Meijerink from the Netherlands for providing the fix in a pull request
+* Bugfix: One of the Mime fallback methods did not work. Thanks to gerasart from Ukraine for providing the fix in a pull request
+
+= 0.25.6 =
+(released 15 April 2023)
+* Bugfix: A bug in another plugin can cause delete file hook to be called with an empty string, which WebP Express was not prepared for (fatal exception). Thanks to Colin Frick from Liechtenstein for providing the fix in a pull request on [github](https://github.com/rosell-dk/webp-express/)
+* Bugfix: Bug when testing imagick converter from settings page (only PHP 8). Thanks to Sisir from Bangladesh for reporting and providing the fix in a pull request
+
 = 0.25.5 =
 (released 23 May 2022)
 * When using the "Prevent using webps larger than original" with Alter HTML (picture tags) on images with srcset, those webps that where larger than the originals was picked out from the srcset for the webp. This could lead to bad quality images. In the fix, the image will only have a webp source alternative when ALL the webps are smaller than their originals (when the "prevent..." option is set). Note: If you were affected by this and use a page caching plugin, you should flush your page cache!
